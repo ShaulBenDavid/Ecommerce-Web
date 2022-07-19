@@ -1,10 +1,10 @@
 import './App.css';
-import Home from './components/routes/Home/Home.component';
+import Home from './routes/Home/Home.component';
 import { Routes, Route } from 'react-router-dom';
-import Navigation from './components/routes/navigation/navigation.component';
-import Authentication from './components/routes/authentication/authentication.component';
-import Shop from './components/routes/Shop/shop.component.jsx';
-import Checkout from './components/routes/Checkout/Checkout.component.jsx';
+import Navigation from './routes/navigation/navigation.component';
+import Authentication from './routes/authentication/authentication.component';
+import Shop from './routes/Shop/shop.component.jsx';
+import Checkout from './routes/Checkout/Checkout.component.jsx';
 
 
 const App = () => {
