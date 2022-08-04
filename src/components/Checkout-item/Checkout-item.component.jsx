@@ -1,11 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useContext } from 'react';
 
-import { cartItemsSelector } from "../../store/cart/cart.selector";
-import {
-  addItemToCart,
-  removeItemToCart,
-  deleteItemToCart,
-} from "../../store/cart/cart.action";
+import { CartContext } from '../../Context/cart.context';
 
 import {
   CheckoutItemContainer,
@@ -15,35 +10,33 @@ import {
   Arrow,
   Value,
   RemoveButton,
-} from "./checkout-item.styles";
+} from './checkout-item.styles';
 
 const CheckoutItem = ({ cartItem }) => {
-  const dispatch = useDispatch();
-  const cartItems = useSelector(cartItemsSelector);
 
-  const { imageUrl, name, quantity, price } = cartItem;
+    const { deleteItemToCart, addItemToCart, removeItemToCart } = useContext(CartContext);
 
-  const handleDeleteItem = () =>
-    dispatch(deleteItemToCart(cartItems, cartItem));
-  const handleRemoveItem = () =>
-    dispatch(removeItemToCart(cartItems, cartItem));
-  const handleAddItem = () => dispatch(addItemToCart(cartItems, cartItem));
+    const { imageUrl, name, quantity, price } = cartItem;
 
-  return (
-    <CheckoutItemContainer>
-      <ImageContainer>
-        <img src={imageUrl} alt={`${name}`} />
-      </ImageContainer>
-      <BaseSpan> {name} </BaseSpan>
-      <Quantity>
-        <Arrow onClick={handleRemoveItem}>&#10094;</Arrow>
-        <Value>{quantity}</Value>
-        <Arrow onClick={handleAddItem}>&#10095;</Arrow>
-      </Quantity>
-      <BaseSpan> {price}</BaseSpan>
-      <RemoveButton onClick={handleDeleteItem}>&#10005;</RemoveButton>
-    </CheckoutItemContainer>
-  );
-};
+    const handleDeleteItem = () => deleteItemToCart(cartItem);
+    const handleRemoveItem = () => removeItemToCart(cartItem);
+    const handleAddItem = () => addItemToCart(cartItem);
 
-export default CheckoutItem;
+    return (
+        <CheckoutItemContainer>
+          <ImageContainer>
+            <img src={imageUrl} alt={`${name}`} />
+          </ImageContainer>
+          <BaseSpan> {name} </BaseSpan>
+          <Quantity>
+            <Arrow onClick={handleRemoveItem}>&#10094;</Arrow>
+            <Value>{quantity}</Value>
+            <Arrow onClick={handleAddItem}>&#10095;</Arrow>
+          </Quantity>
+          <BaseSpan> {price}</BaseSpan>
+          <RemoveButton onClick={handleDeleteItem}>&#10005;</RemoveButton>
+        </CheckoutItemContainer>
+      );
+    };
+    
+    export default CheckoutItem;

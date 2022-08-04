@@ -1,1 +1,0 @@
-export const newReducer = (type, payload) => ({ type, payload });
